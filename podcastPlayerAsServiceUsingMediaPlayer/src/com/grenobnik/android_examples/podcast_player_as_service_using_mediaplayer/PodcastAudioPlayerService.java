@@ -123,13 +123,16 @@ public class PodcastAudioPlayerService extends Service implements //
     private void play() {
 	Log.d(TAG, "play");
 	if (mPlayer == null) {
+	    Log.d(TAG, "play : Instantiating a new MediaPlayer and obtaining wifi and power locks...");
 	    mPlayer = new MediaPlayer();
 	    wifiLock = ((WifiManager) getSystemService(Context.WIFI_SERVICE)).createWifiLock(WifiManager.WIFI_MODE_FULL, "keep WiFi alive");
 	    wifiLock.acquire();
 	    mPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
 	} else {
+	    Log.d(TAG, "play : resetting mPlayer state...");
 	    mPlayer.reset();
 	}
+	Log.d(TAG, "play : initializing the mPlayer...");
 	mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 	mPlayer.setOnPreparedListener(this);
 	mPlayer.setOnErrorListener(this);
@@ -137,11 +140,12 @@ public class PodcastAudioPlayerService extends Service implements //
 	try {
 	    mPlayer.setDataSource(podcastAudioSource);
 	} catch (IOException e) {
-	    Log.e(TAG, "Could not open audio " + podcastAudioSource + " for playback.", e);
+	    Log.e(TAG, "play : Could not open audio " + podcastAudioSource + " for playback.", e);
 	}
 	audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 	int result = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 	if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+	    Log.d(TAG, "play : calling prepareAsync");
 	    mPlayer.prepareAsync();
 	} else {
 	    Log.e(TAG, "Could not get audio focus.");
@@ -160,6 +164,9 @@ public class PodcastAudioPlayerService extends Service implements //
 	wifiLock.release();
 	audioManager.abandonAudioFocus(this);
 	if (mPlayer != null) {
+	    mPlayer.setOnPreparedListener(null);
+	    mPlayer.setOnErrorListener(null);
+	    mPlayer.setOnCompletionListener(null);
 	    mPlayer.release();
 	    mPlayer = null;
 	}
@@ -176,6 +183,7 @@ public class PodcastAudioPlayerService extends Service implements //
      */
     @Override
     public void onPrepared(MediaPlayer mp) {
+	Log.d(TAG, "onPrepared : starting to play");
 	mp.start();
     }
 
