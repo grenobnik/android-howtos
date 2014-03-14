@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="press Start button to play podcast in background, press Stop button to terminate the background service"
+        android:textSize="24sp" >
+    </TextView>
+
+    <Button
+        android:id="@+id/buttonStart1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:text="Start live stream 1"
+        android:textSize="24sp" >
+    </Button>
+
+    <Button
+        android:id="@+id/buttonStart2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonStart1"
+        android:text="Start live stream 2"
+        android:textSize="24sp" >
+    </Button>
+
+        <Button
+        android:id="@+id/buttonStart3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonStart2"
+        android:text="Start short mp3 playback"
+        android:textSize="24sp" >
+    </Button>
+
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonStart3"
+        android:text="Stop"
+        android:textSize="24sp" >
+    </Button>
+
+</RelativeLayout>
