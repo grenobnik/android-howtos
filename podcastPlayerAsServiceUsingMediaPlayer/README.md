@@ -17,7 +17,7 @@ References:
 ===========
 
 * [API Guide: Services](http://developer.android.com/guide/components/services.html)
+* [Reference: Service](http://developer.android.com/reference/android/app/Service.html)
 * [API Guide: Media Playback](http://developer.android.com/guide/topics/media/mediaplayer.html)
 * [Reference: MediaPlayer](http://developer.android.com/reference/android/media/MediaPlayer.html)
-* [Reference: Service](http://developer.android.com/reference/android/app/Service.html)
 * [Training: Managing Audio Focus](http://developer.android.com/training/managing-audio/audio-focus.html)
